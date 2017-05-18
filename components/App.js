@@ -1,3 +1,10 @@
+// Open up `<App />`
+// again and observe that `startInterval()` and `cleanUpInterval()` already exist. They're just not used.
+// Use the `componentDidMount()` and `componentWillUnmount()` lifecycle hooks to start the interval when
+// the component is mounted and to clean it up when the component is unmounted.
+
+require('fbjs/lib/ExecutionEnvironment').canUseDOM = true
+
 import React from 'react';
 import TweetWall from './TweetWall';
 
@@ -17,12 +24,21 @@ export default class App extends React.Component {
   }
 
   // TODO: componentWillMount()
-
+  componentWillMount(){
+    this.fetchTweets()
+  }
   // TODO: componentDidMount()
-
+  componentDidMount(){
+    this.startInterval()
+  }
   // TODO: componentWillUnmount()
-
+  componentWillUnmount(){
+    this.cleanUpInterval()
+  }
   // TODO: componentDidUpdate()
+  componentDidUpdate(){
+    this.updateChart(this.state.latestTweets.length)
+  }
 
   updateChart(numTweets) {
     update(numTweets);
